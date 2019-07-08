@@ -1,10 +1,15 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options, DesiredCapabilities
 
 options = Options()
 options.add_argument(
     'user-agent= Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
-driver = webdriver.Chrome(options=options)
+
+driver = webdriver.Remote(
+    command_executor='http://0.0.0.0:4444/wd/hub',
+    desired_capabilities=DesiredCapabilities.CHROME
+)
+
 driver.get("https://www.dailyobjects.com/")
 html_source = driver.page_source
 
