@@ -1,13 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from fake_useragent import UserAgent
 
 options = Options()
-options.add_argument('user-agent= Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+useragent='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+options.add_argument('user-agent= ' + useragent)
 driver = webdriver.Chrome(options=options)
 driver.get("https://www.dailyobjects.com/")
 html_source = driver.page_source
-print (html_source)
 
 if ('header-row' in html_source):
     print('Header row is present')
