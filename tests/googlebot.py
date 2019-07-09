@@ -1,5 +1,16 @@
+import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options, DesiredCapabilities
+
+switch = {
+    "live" : "www",
+    "stage" : "stage",
+    "dev" : "dev"
+}
+
+api = switch.get(sys.argv[1])
+
+url = "https://" + api + ".dailyobjects.com/"
 
 options = Options()
 options.add_argument(
@@ -10,7 +21,7 @@ driver = webdriver.Remote(
     desired_capabilities=DesiredCapabilities.CHROME
 )
 
-driver.get("https://www.dailyobjects.com/")
+driver.get(url)
 html_source = driver.page_source
 
 if 'header-row' in html_source:
