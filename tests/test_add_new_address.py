@@ -1,10 +1,10 @@
-import time
-
 from selenium import webdriver
+import time
 
 driver = webdriver.Chrome()
 
-driver.get("https://stage.dailyobjects.com/auth/login")
+url = "https://www.dailyobjects.com/auth/login"
+driver.get(url)
 
 phone_number=driver.find_elements_by_class_name("mat-form-field-autofill-control")[0]
 phone_number.click()
@@ -36,7 +36,7 @@ driver.find_elements_by_tag_name("li")[0].click()
 
 time.sleep(5)
 
-driver.find_elements_by_class_name("mat-ripple")[2].click()
+driver.find_elements_by_class_name("mat-ripple")[3].click()
 
 time.sleep(2)
 
@@ -60,7 +60,7 @@ address = driver.find_elements_by_class_name("mat-form-field-autofill-control")[
 address.click()
 address.send_keys("My new address")
 
-time.sleep(2)
+time.sleep(5)
 
 country = driver.find_elements_by_class_name("mat-select-placeholder")[0]
 country.click()
@@ -78,34 +78,26 @@ state.click()
 time.sleep(2)
 driver.find_elements_by_class_name("mat-option")[22].click()
 
-if (driver.find_elements_by_class_name("ng-star-inserted")[162].text=="Mobile must be a valid mobile number"):
-    print("Error detected in mobile number")
-    number = driver.find_elements_by_class_name("mat-form-field-autofill-control")[1]
-    number.click()
-    number.clear()
-    number.send_keys("7979901194")
-    print("Error in mobile number corrected")
+for i in range(0, len(driver.find_elements_by_class_name("ng-star-inserted"))-1):
+    if (driver.find_elements_by_class_name("ng-star-inserted")[i].text=="Mobile must be a valid mobile number"):
+        print("Error detected in mobile number")
+        number = driver.find_elements_by_class_name("mat-form-field-autofill-control")[1]
+        number.click()
+        number.clear()
+        number.send_keys("7979901194")
+        print("Error in mobile number corrected")
+        break
 
-if (driver.find_elements_by_class_name("ng-star-inserted")[165].text=="Pin Code must be valid"):
-    print("Error detected in pincode")
-    pincode = driver.find_elements_by_class_name("mat-form-field-autofill-control")[2]
-    pincode.click()
-    pincode.clear()
-    pincode.send_keys("110030")
-    print("Error in pincode corrected")
+for i in range(0, len(driver.find_elements_by_class_name("ng-star-inserted"))-1):
+    if (driver.find_elements_by_class_name("ng-star-inserted")[i].text=="Pin Code must be valid"):
+        print("Error detected in pincode")
+        pincode = driver.find_elements_by_class_name("mat-form-field-autofill-control")[2]
+        pincode.click()
+        pincode.clear()
+        pincode.send_keys("110030")
+        print("Error in pincode corrected")
+        break
 
 driver.find_elements_by_class_name("add-new-address")[0].click()
 
 print("New address saved")
-
-
-
-
-
-
-
-
-
-
-
-
