@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options, DesiredCapabilities
 
 
-class testing_googelbot(cls):
+class testing_googlebot(cls):
     driver = webdriver.Remote
     url = ""
     @classmethod
